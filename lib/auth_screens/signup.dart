@@ -49,25 +49,25 @@ class _SignUpState extends State<SignUp> {
                 height: defaultPadding * 2,
               ),
               FieldText(
-                hint: "Name",
+                hint: "Name",trailing: false,
               ),
               SizedBox(
                 height: defaultPadding / 2,
               ),
               FieldText(
-                hint: "Username, Email & Phone Number",
+                hint: "Username, Email & Phone Number",trailing: false,
               ),
               SizedBox(
                 height: defaultPadding / 2,
               ),
               FieldText(
-                hint: "Password",
+                hint: "Password",trailing: false,
               ),
               SizedBox(
                 height: defaultPadding / 2,
               ),
               FieldText(
-                hint: "Confirm Password",
+                hint: "Confirm Password",trailing: false,
               ),
               SizedBox(
                 height: defaultPadding * 2,

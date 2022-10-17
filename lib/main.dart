@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:snipe59_mobile_digit/auth_screens/login.dart';
+import 'package:snipe59_mobile_digit/home.dart';
 import 'package:snipe59_mobile_digit/url_screen.dart';
 
 import 'splash.dart';
@@ -19,7 +21,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const UrlScreen(),
+      home: const Home(),
     );
   }
 }

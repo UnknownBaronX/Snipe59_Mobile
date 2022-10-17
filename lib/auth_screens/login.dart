@@ -48,13 +48,13 @@ class _LoginState extends State<Login> {
                 height: defaultPadding * 2,
               ),
               FieldText(
-                hint: "UserName, Email & Phone Number",
+                hint: "UserName, Email & Phone Number",trailing: false,
               ),
               SizedBox(
                 height: defaultPadding / 2,
               ),
               FieldText(
-                hint: "Password",
+                hint: "Password",trailing: false,
               ),
               SizedBox(
                 height: defaultPadding / 2,

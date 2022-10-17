@@ -55,7 +55,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               height: defaultPadding,
             ),
             FieldText(
-              hint: "Username, Email & Phone Number",
+              hint: "Username, Email & Phone Number",trailing: false,
             ),
             SizedBox(
               height: defaultPadding,
