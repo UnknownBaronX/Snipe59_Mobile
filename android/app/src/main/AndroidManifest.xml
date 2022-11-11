@@ -1,7 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="pk.digit.snipe59_mobile_digit">
+    package="com.example.football">
    <application
-        android:label="snipe59_mobile_digit"
+        android:usesCleartextTraffic="true"
+        android:label="football"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
@@ -30,5 +31,6 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+    
     </application>
 </manifest>

@@ -1,25 +1,44 @@
 import 'package:flutter/material.dart';
-import 'package:snipe59_mobile_digit/url_screen.dart';
-
-import 'splash.dart';
+import 'package:webview_flutter_plus/webview_flutter_plus.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const MaterialApp(
+    home: MyApp(),
+  ));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class MyApp extends StatefulWidget {
+  const MyApp({super.key});
 
-  // This widget is the root of your application.
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  late WebViewPlusController _controller;
+
+  double _height = 1000;
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return SafeArea(
+      child: Scaffold(
+        body: WebViewPlus(
+          initialUrl: 'asset/popup.html',
+          onWebViewCreated: (controller) {
+            _controller = controller;
+          },
+          onPageFinished: (url) {
+            _controller.getHeight().then((double height) {
+              print("Height: " + height.toString());
+              setState(() {
+                _height = height;
+              });
+            });
+          },
+          javascriptMode: JavascriptMode.unrestricted,
+        ),
       ),
-      home: const UrlScreen(),
     );
   }
 }
