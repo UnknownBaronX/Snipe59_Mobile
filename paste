@@ -1,0 +1,20 @@
+$.ajax({
+        type: "GET",
+        url: "https://futstarz.com/wp-json/lmfwc/v2/licenses/" +
+            licenseKey + "?" +
+            "consumer_key=" + ck +
+            "&consumer_secret=" + cs,
+        dataType: "json",
+        contentType: "application/json",
+    })
+
+
+ var ck = "ck_5cd18f4adb18fcda3481528335234b66b80b729e";
+ var cs = "cs_5e48df88dcb579c73256b6f823b46beb08e2104d";
+
+
+to validate:
+   let licenseExpiresAt = new Date(response.data.expiresAt).toISOString();
+
+ letisoString = now.toISOString();
+if (licenseExpiresAt >= isoString && response.data.status == 2)
