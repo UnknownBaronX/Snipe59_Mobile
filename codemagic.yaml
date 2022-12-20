@@ -3,8 +3,6 @@ workflows:
     name: iOS Workflow ad-hoc
     environment:
       ios_signing:
-        distribution_type: ad_hoc
-        bundle_identifier: com.FutstarzRedBaron.snipe59
         provisioning_profiles:
             - Ad-Hoc profile
         certificates:
