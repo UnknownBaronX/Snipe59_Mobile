@@ -10,14 +10,11 @@ workflows:
         certificates:
             - Codemagic Cert
     scripts:
-        - script: keychain initialize
-        - script: keychain add-certificates
-        
         - script: xcode-project use-profiles
         - script: flutter packages pub get
         - name: Flutter build ipa and automatic versioning
           script: /
-              flutter build ipa --export-options-plist=/Users/builder/export_options.plist
+              flutter build ipa --no-sound-null-safety
     artifacts:
         - build/ios/ipa/*.ipa
  
