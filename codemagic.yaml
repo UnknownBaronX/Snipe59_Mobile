@@ -2,6 +2,7 @@ workflows:
   ios-workflow:
     name: iOS Workflow ad-hoc
     environment:
+      xcode: 14.1
       ios_signing:
         provisioning_profiles:
             - Ad-Hoc profile
@@ -11,8 +12,7 @@ workflows:
         - script: xcode-project use-profiles
         - script: flutter packages pub get
         - name: Flutter build ipa and automatic versioning
-          script: /
-              flutter build ipa --no-sound-null-safety
+          script: flutter build ipa 
     artifacts:
         - build/ios/ipa/*.ipa
  
