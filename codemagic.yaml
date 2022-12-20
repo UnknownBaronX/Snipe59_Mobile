@@ -2,7 +2,6 @@ workflows:
   ios-workflow:
     name: iOS Workflow ad-hoc
     environment:
-      xcode: 14.1
       ios_signing:
         provisioning_profiles:
             - Ad-Hoc profile
