@@ -1,5 +1,23 @@
 workflows:
-    sample-workflow:
-        name: FUT Snipe59
-        max_build_duration: 120
-        instance_type: mac_mini_m1
+  ios-workflow:
+    name: iOS Workflow ad-hoc
+    environment:
+      ios_signing:
+        distribution_type: ad_hoc
+        bundle_identifier: com.FutstarzRedBaron.snipe59
+        provisioning_profiles:
+            - Ad-Hoc profile
+        certificates:
+            - Codemagic Cert
+    scripts:
+        - script: keychain initialize
+        - script: keychain add-certificates
+        
+        - script: xcode-project use-profiles
+        - script: flutter packages pub get
+        - name: Flutter build ipa and automatic versioning
+          script: /
+              flutter build ipa --export-options-plist=/Users/builder/export_options.plist
+    artifacts:
+        - build/ios/ipa/*.ipa
+ 
