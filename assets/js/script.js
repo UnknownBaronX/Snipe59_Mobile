@@ -1079,7 +1079,9 @@ function getCurrentUserSBP() {
  */
 async function searchMarket() {
     await saveFilterCriteria()
-    var searchButton = document.querySelector('.ut-content button.btn-standard.call-to-action');
+    var searchButton = document.querySelectorAll('button.btn-standard.call-to-action')
+    //find element where innerText is "Search"
+    searchButton = Array.from(searchButton).find(element => element.innerText === "Search");
     let curentController = window.currentPage;
     if (curentController == 'UTMarketSearchFiltersViewController') {
         await tapElement(searchButton);
