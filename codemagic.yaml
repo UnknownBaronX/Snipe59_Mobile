@@ -10,6 +10,8 @@ workflows:
     scripts:
         - script: xcode-project use-profiles
         - script: flutter packages pub get
+        - name: set up code signing settings on xcode project
+          script: xcode-project use-profiles
         - name: Flutter build ipa and automatic versioning
           script: flutter build ipa 
     artifacts:
