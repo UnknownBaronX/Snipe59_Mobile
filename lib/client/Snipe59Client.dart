@@ -1,11 +1,15 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:developer';
+import 'dart:io';
 
 import 'package:http/http.dart' as http;
+import 'package:package_info/package_info.dart';
 import 'package:snipe59/entity/Futsovereign.dart';
 import 'dart:developer' as developer;
 
 import 'package:snipe59/entity/Licence.dart';
+import 'package:snipe59/entity/ShowView.dart';
 
 class Snipe59Client {
   Snipe59Client({
@@ -26,6 +30,36 @@ class Snipe59Client {
       return Licence.fromJson(results);
     } else {
       throw Future.error(response.statusCode);
+    }
+  }
+
+  Future<bool> fetchShowView() async {
+    if (!Platform.isIOS) {
+      return true;
+    }
+
+    try {
+      final response = await httpClient.get(
+          Uri.parse("https://futsovereign.com/futsovereign/status/review"));
+
+      final results = json.decode(response.body);
+      final info = ShowView.fromJson(results);
+
+      PackageInfo packageInfo = await PackageInfo.fromPlatform();
+      String buildCompleteVersion =
+          "${packageInfo.version}+${packageInfo.buildNumber}";
+
+      if (response.statusCode == 200) {
+        if (info.version == buildCompleteVersion && info.active == 'true') {
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        return false;
+      }
+    } catch (e) {
+      return false;
     }
   }
 }

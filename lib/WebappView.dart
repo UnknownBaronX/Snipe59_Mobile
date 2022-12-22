@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:developer' as developer;
-
+import 'package:wakelock/wakelock.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
@@ -16,6 +16,7 @@ typedef void OnHideSettings();
 class WebAppView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Wakelock.enable();
     return WebAppViewPage();
   }
 }

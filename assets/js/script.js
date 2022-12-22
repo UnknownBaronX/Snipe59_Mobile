@@ -1079,7 +1079,10 @@ function getCurrentUserSBP() {
  */
 async function searchMarket() {
     await saveFilterCriteria()
-    var searchButton = document.querySelector('.ut-content button.btn-standard.call-to-action');
+    var searchButton = document.querySelectorAll('button.btn-standard.call-to-action')
+    //find element where innerText is "Search"
+    searchButton = Array.from(searchButton).find(element => element.innerText === "Search");
+
     let curentController = window.currentPage;
     if (curentController == 'UTMarketSearchFiltersViewController') {
         await tapElement(searchButton);
@@ -1395,8 +1398,11 @@ function playerViewPanelOverride() {
 function quickListOpenOverride() {
     const quickListOpen = UTQuickListPanelViewController.prototype._onOpen;
     UTQuickListPanelViewController.prototype._onOpen = function (...args) {
+    try{
         services.User.maxAllowedAuctions = autoBuySettings.activeTransfers ? 100 : 30;
-
+    }catch{
+        services.User.maxAllowedAuctions = 30;
+    }
         return quickListOpen.call(this, ...args);
     };
 };

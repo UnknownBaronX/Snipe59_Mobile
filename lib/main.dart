@@ -39,6 +39,7 @@ Future main() async {
 }
 
 class MyApp extends StatelessWidget {
+  
   const MyApp(
       {Key? key,
       required this.futsovereignRepository,
@@ -46,6 +47,7 @@ class MyApp extends StatelessWidget {
       : super(key: key);
   final FutsovereignRepository futsovereignRepository;
   final Snipe59Repository snipe59Repository;
+  
 
   // This widget is the root of your application.
   @override
@@ -77,7 +79,6 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _tabIndex = 0;
-
   int get tabIndex => _tabIndex;
 
   set tabIndex(int v) {
@@ -89,18 +90,28 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void initState() {
+
     super.initState();
     pageController = PageController(initialPage: _tabIndex);
+
   }
 
+
+
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context)  {
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
+
+    return FutureBuilder(
+        future: widget.snipe59Repository.fetchShowView(),
+        builder: (BuildContext context, snapshot) {
+          
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const  Color(0xff111823),
@@ -117,14 +128,14 @@ class _MyHomePageState extends State<MyHomePage> {
           Image.asset(
             "assets/tp-128.png",
           ),
-          Image.asset(
+          if(snapshot.data.toString() == 'true') Image.asset(
             "assets/RT.png",
           ),
         ],
-        inactiveIcons: const [
+        inactiveIcons:  [
           Text("Prices PS/XB"),
           Text("Prices PC"),
-          Text("Snipe 59"),
+           if(snapshot.data.toString() == 'true') Text("Snipe 59"),
         ],
         color: Colors.white,
         height: 60,
@@ -162,7 +173,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 console: "pc",
               ),
             ),
-            BlocProvider(
+            if(snapshot.data.toString() == 'true') BlocProvider(
               create: (_) => Snipe59Bloc(
                   snipe59Repository: this.widget.snipe59Repository,
                   futsovereignRepository: this.widget.repository),
@@ -172,5 +183,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
     );
+    
+        });
   }
 }
