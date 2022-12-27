@@ -39,7 +39,7 @@ class NavBar extends StatelessWidget {
           alignment: Alignment.bottomCenter,
           child: ListTile(
             leading: Icon(Icons.info, color: Colors.white),
-            title: Text("Version: 1.0.0"),
+            title: Text("Version: 1.0.2"),
             textColor: Colors.white,
    
           )
