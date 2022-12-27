@@ -53,7 +53,7 @@ class Snipe59Client {
         if (info.version == buildCompleteVersion && info.active == 'true') {
           return true;
         } else if (info.version != buildCompleteVersion &&
-            info.active == 'true') {
+            info.active == 'false') {
           return true;
         } else {
           return false;
