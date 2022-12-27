@@ -30,24 +30,6 @@ class NavBar extends StatelessWidget {
               _launchInBrowser(Uri.parse("https://discord.gg/futstarz"));
             },
           ),
-          ListTile(
-            leading: Icon(Icons.attach_money, color: Colors.green),
-            title: Text("Sell Coins - Safe!"),
-            textColor: Colors.white,
-            onTap: () async {
-              _launchInBrowser(
-                  Uri.parse("https://www.safetycoins.net/en/sell/coins"));
-            },
-          ),
-                    ListTile(
-            leading: Icon(Icons.web, color: Colors.orange),
-            title: Text("FUTstarz.com - Buy TradePro!"),
-            textColor: Colors.white,
-            onTap: () async {
-              _launchInBrowser(
-                  Uri.parse("https://www.futstarz.com/shop/"));
-            },
-          ),
           //section line
 
 
