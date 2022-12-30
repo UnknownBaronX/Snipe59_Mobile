@@ -143,6 +143,32 @@ class _Snipe59ViewState extends State<Snipe59View> {
                       ),
                     ),
                   ),
+TextButton(
+      onPressed: () => showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          title: const Text('Login description'),
+          content: const Text(
+          '''
+When attempting to login for the first time on the webapp screen and waiting for your 2-Factor authentication code , the webapp does not react 80% of the time after you enter the code.
+
+If you encounter this problem, go back to the main app screen, click login again at the license section, login again and paste the SAME 2 factor code into the field QUICKLY. 
+
+If the webapp doesn't react, repeat the above process.
+
+This only occurs when attempting to  login for the first time.
+
+For further assistance visit our Discord.'''
+              ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.pop(context, 'OK'),
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      ),
+      child: const Text('Login help'),),
                   Padding(
                     padding: EdgeInsets.only(bottom: 30, top: 30),
                     child: BlocConsumer<Snipe59Bloc, Snipe59State>(
@@ -189,7 +215,8 @@ class _Snipe59ViewState extends State<Snipe59View> {
                       }
                       return Container();
                     }),
-                  )
+                  ),
+
                 ],
               ),
             )

@@ -1659,7 +1659,8 @@ window.deleteFilter = function () {
         delete filterArray[filterName]
         localStorage.setItem('filterArray', JSON.stringify(filterArray));
         console.log(filterArray)
-        
+        //TODO SEND FILTER NAME TO FLUTTER
+        window.flutter_inappwebview.callHandler('deleteFilterName', filterName);
         window.notify("Changes saved successfully");
     }
 };
@@ -1708,11 +1709,7 @@ window.saveDetails = function () {
     setTimeout(function () {
 
         let settingsJson = {};
-
-
         settingsJson.searchCriteria = {criteria: getAppMain().getRootViewController().getPresentedViewController().getCurrentViewController().getCurrentController()._viewmodel.searchCriteria};
-
-
         var currentFilterName = $('select[name=filters] option').filter(':selected').val();
         if (currentFilterName === 'Choose filter to load') {
             currentFilterName = undefined;
@@ -1732,7 +1729,7 @@ window.saveDetails = function () {
               //check if filterArray exists at localStorage
               if (localStorage.getItem('filterArray') === null) {
                 filterArray = {}
-                localStorage.setItem('filterArray',(filterArray)) }
+                localStorage.setItem('filterArray', JSON.stringify(filterArray)) }
             
             filterArray = JSON.parse(localStorage.getItem('filterArray'))
             filterArray[filterName] = settingsJson
@@ -1740,6 +1737,8 @@ window.saveDetails = function () {
 
             localStorage.setItem('filterArray', JSON.stringify(filterArray));
             $(namePreserveChanges).removeClass("active");
+            //TODO SEND FILTER NAME TO FLUTTER
+            window.flutter_inappwebview.callHandler('addFilterName', filterName);
             window.notify("Changes saved successfully");
         } else {
             $(namePreserveChanges).removeClass("active");

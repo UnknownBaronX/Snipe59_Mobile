@@ -69,7 +69,8 @@ class _WebAppPageState extends State<WebAppViewPage> {
                       InAppWebView(
                         initialUrlRequest: URLRequest(
                             url: Uri.parse(
-                                "https://www.ea.com/fifa/ultimate-team/web-app/")),
+utf8.decode(base64Url.decode('aHR0cHM6Ly93d3cuZWEuY29tL2ZpZmEvdWx0aW1hdGUtdGVhbS93ZWItYXBwLw=='))
+                            )),
                         onWebViewCreated: (InAppWebViewController controller) {
                           webView = controller;
                           webView.addJavaScriptHandler(
@@ -87,6 +88,36 @@ class _WebAppPageState extends State<WebAppViewPage> {
                               setState(() {
                                 _refreshKey = UniqueKey();
                               });
+                            },
+                          );
+                          webView.addJavaScriptHandler(
+                            handlerName: "addFilterName",
+                            callback: (List<dynamic> payload) {
+                              var filterName = payload[0];
+                              developer.log("On ajoute le filtre " + filterName,
+                                  name: "Snipe 59");
+                              List<String>? filterList =
+                                  sharedPref.getStringList("filters");
+                              filterList ??= List.empty(growable: true);
+                              if (!filterList.contains(filterName)) {
+                                filterList.add(filterName);
+                              }
+                              sharedPref.setStringList("filters", filterList);
+                            },
+                          );
+                          webView.addJavaScriptHandler(
+                            handlerName: "deleteFilterName",
+                            callback: (List<dynamic> payload) {
+                              var filterName = payload[0];
+                              developer.log("On delete le filtre " + filterName,
+                                  name: "Snipe 59");
+                              List<String>? filterList =
+                                  sharedPref.getStringList("filters");
+                              filterList ??= List.empty(growable: true);
+                              if (filterList.contains(filterName)) {
+                                filterList.remove(filterName);
+                              }
+                              sharedPref.setStringList("filters", filterList);
                             },
                           );
                         },
