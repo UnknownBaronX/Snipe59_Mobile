@@ -3,7 +3,7 @@
         var elements = document.getElementsByClassName("ut-tab-bar");
 
         if (elements.length > 0) {
-            await sleep(2000);
+            await sleep(1000);
             getProfiles();
             initSettingsButton();
             overrideStatusCheck();
@@ -123,6 +123,10 @@
         iframe.style.display = 'none';
         document.body.appendChild(iframe);
         window.console = iframe.contentWindow.console;
+    }
+
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
     }
 
     function overrideStatusCheck() {
