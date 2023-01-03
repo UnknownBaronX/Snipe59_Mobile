@@ -51,7 +51,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       profileList.add(p);
       await sharedPreferences.setString('profiles', jsonEncode(profileList));
     }
-    emit(ProfileStateListSuccess(profileList: profileList));
+    List<String>? filterList =
+    await sharedPreferences.getStringList("filters");
+    emit(ProfileStateListSuccess(profileList: profileList, filterList: filterList));
   }
 
   void _onSaveProfile(
@@ -74,7 +76,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         }
       }
       await sharedPreferences.setString('profiles', jsonEncode(profileToSave));
-      emit(ProfileStateListSuccess(profileList: profileToSave));
+      List<String>? filterList =
+      await sharedPreferences.getStringList("filters");
+      emit(ProfileStateListSuccess(profileList: profileToSave, filterList: filterList));
       emit(ProfileStateReload());
     }
   }
@@ -101,7 +105,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       }
 
       await sharedPreferences.setString('profiles', jsonEncode(profileToSave));
-      emit(ProfileStateListSuccess(profileList: profileToSave));
+      List<String>? filterList =
+      await sharedPreferences.getStringList("filters");
+      emit(ProfileStateListSuccess(profileList: profileToSave, filterList: filterList));
       emit(ProfileStateReload());
     }
   }
@@ -128,7 +134,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         profileToSave.add(p);
       }
       await sharedPreferences.setString('profiles', jsonEncode(profileToSave));
-      emit(ProfileStateListSuccess(profileList: profileToSave));
+      List<String>? filterList =
+      await sharedPreferences.getStringList("filters");
+      emit(ProfileStateListSuccess(profileList: profileToSave, filterList: filterList));
     }
   }
 
@@ -150,7 +158,10 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         profileList.add(p);
         await sharedPreferences.setString('profiles', jsonEncode(profileList));
       }
-      emit(ProfileStateListSuccess(profileList: profileList));
+      List<String>? filterList =
+          await sharedPreferences.getStringList("filters");
+      emit(ProfileStateListSuccess(
+          profileList: profileList, filterList: filterList));
     } catch (error) {
       developer.log(error.toString(), name: 'Snipe59');
       emit(ProfileStateListError());

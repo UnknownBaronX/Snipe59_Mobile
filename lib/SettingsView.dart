@@ -49,6 +49,8 @@ class _SettingsViewPageState extends State<SettingsViewPage> {
   late Profile? profile = null;
   late String selectedProfile;
   late List<Profile> profileList;
+  late List<String>? filterList;
+
   late List<ItemDropdown> profiles;
   late BuySellPanel buyPanel;
   late SearchPanel searchPanel;
@@ -69,9 +71,10 @@ class _SettingsViewPageState extends State<SettingsViewPage> {
     _profileBloc.add(LoadProfiles());
   }
 
-  void initProfilesList(List<Profile> profileList) {
+  void initProfilesList(List<Profile> profileList, List<String>? filterList) {
     Profile? activeProfile = null;
     this.profileList = profileList;
+    this.filterList = filterList;
     this.profiles = List.empty(growable: true);
     for (var p in profileList) {
       this.profiles.add(ItemDropdown(label: p.profileName!, value: p.uuid!));
@@ -92,7 +95,7 @@ class _SettingsViewPageState extends State<SettingsViewPage> {
     searchPanel = SearchPanel(profile!);
     miscPanel = MiscPanel(profile!);
     notificationpanel = Notificationpanel(profile!);
-    filterPanel = FilterPanel(profile!);
+    filterPanel = FilterPanel(profile!, this.filterList);
 
     items = <SettingsPanel>[
       SettingsPanel(
@@ -213,7 +216,7 @@ class _SettingsViewPageState extends State<SettingsViewPage> {
           BlocConsumer<ProfileBloc, ProfileState>(
             listener: (context, state) {
               if (state is ProfileStateListSuccess) {
-                initProfilesList(state.profileList);
+                initProfilesList(state.profileList, state.filterList);
               } else if (state is ProfileStateReload) {
                 onSave.call();
                 showSnackbarSuccess("Settings saved");
@@ -956,17 +959,25 @@ class FilterPanel extends StatelessWidget {
   late CheckBoxCustom _switchFilter;
   late DropDownCustom _filterList;
 
-  FilterPanel(Profile p) {
+  FilterPanel(Profile p, List<String>? filterList) {
     this.profile = p;
 
     this._switchFilter = CheckBoxCustom(
       title: "Switch Filter",
       value: profile.filterSwitch,
     );
+    List<ItemDropdown> items = List.empty(growable: true);
+    if (filterList != null) {
+      for (String s in filterList) {
+        var item = ItemDropdown(label: s, value: s);
+        items.add(item);
+      }
+    }
+
     this._filterList = DropDownCustom(
       title: "Filter",
       selectedValue: profile.filter,
-      items: [],
+      items: items,
     );
     _nbSearchFilterControler.text =
         p.filterSearchAmount != null ? p.filterSearchAmount.toString() : "";

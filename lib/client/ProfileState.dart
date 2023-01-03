@@ -17,9 +17,10 @@ class ProfileStateLoading extends ProfileState {}
 class ProfileStateReload extends ProfileState {}
 
 class ProfileStateListSuccess extends ProfileState {
-  const ProfileStateListSuccess({required this.profileList});
+  const ProfileStateListSuccess({required this.profileList, required this.filterList});
 
   final List<Profile> profileList;
+  final List<String>? filterList;
 
   @override
   List<Object> get props => [profileList];
