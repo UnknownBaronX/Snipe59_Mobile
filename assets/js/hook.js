@@ -3,6 +3,7 @@
         var elements = document.getElementsByClassName("ut-tab-bar");
 
         if (elements.length > 0) {
+            await sleep(2000);
             getProfiles();
             initSettingsButton();
             overrideStatusCheck();
