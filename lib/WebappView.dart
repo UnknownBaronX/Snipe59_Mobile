@@ -68,9 +68,8 @@ class _WebAppPageState extends State<WebAppViewPage> {
                     children: [
                       InAppWebView(
                         initialUrlRequest: URLRequest(
-                            url: Uri.parse(
-utf8.decode(base64Url.decode('aHR0cHM6Ly93d3cuZWEuY29tL2ZpZmEvdWx0aW1hdGUtdGVhbS93ZWItYXBwLw=='))
-                            )),
+                            url: Uri.parse(utf8.decode(base64Url.decode(
+                                'aHR0cHM6Ly93d3cuZWEuY29tL2ZpZmEvdWx0aW1hdGUtdGVhbS93ZWItYXBwLw==')))),
                         onWebViewCreated: (InAppWebViewController controller) {
                           webView = controller;
                           webView.addJavaScriptHandler(
@@ -120,24 +119,38 @@ utf8.decode(base64Url.decode('aHR0cHM6Ly93d3cuZWEuY29tL2ZpZmEvdWx0aW1hdGUtdGVhbS
                               sharedPref.setStringList("filters", filterList);
                             },
                           );
-                        },
-                        onTitleChanged: (controller, title) {
-                          webView.injectJavascriptFileFromAsset(
+                          webView.addJavaScriptHandler(
+                            handlerName: "injectScript",
+                            callback: (List<dynamic> payload) {
+                              developer.log("Injected script",
+                                  name: "Snipe 59");
+                                webView.injectJavascriptFileFromAsset(
                               assetFilePath: "assets/js/jquery-3.5.1.min.js");
+                               webView.injectJavascriptFileFromAsset(
+                              assetFilePath: "assets/js/script.js");
                           webView.injectJavascriptFileFromAsset(
                               assetFilePath: "assets/js/hook.js");
-                          webView.injectJavascriptFileFromAsset(
-                              assetFilePath: "assets/js/script.js");
+                         
                           webView.injectCSSFileFromAsset(
                               assetFilePath: "assets/css/main.css");
+                          developer.log("Injected script finished",
+                                  name: "Snipe 59");
+                            
+                          
+                            },
+                          );
                         },
+                        onTitleChanged: (controller, title) {},
                         onReceivedServerTrustAuthRequest:
                             (InAppWebViewController controller,
                                 URLAuthenticationChallenge challenge) async {
                           return ServerTrustAuthResponse(
                               action: ServerTrustAuthResponseAction.PROCEED);
                         },
-                        onLoadStop: (controller, url) {},
+                        onLoadStop: (controller, url) {
+                          controller.injectJavascriptFileFromAsset(
+                              assetFilePath: "assets/js/initScript.js");
+                        },
                         shouldOverrideUrlLoading:
                             (controller, navigationAction) async {
                           var url = navigationAction.request.url;
