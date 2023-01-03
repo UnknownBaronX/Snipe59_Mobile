@@ -25,7 +25,35 @@ var sessionState = {
 
 
 
+function searchMarketOverride() {
+    JSUtils.inherits(UTMarketSearchFiltersViewController, UTMarketSearchFiltersViewController)
 
+    const initTM =
+        UTMarketSearchFiltersViewController.prototype.init;
+
+    UTMarketSearchFiltersViewController.prototype.init = function () {
+        initTM.call(this);
+        let view = this.getView();
+        let root = $(view.__root);
+        const btnContainer = root.find(".button-container");
+        const createButtonWithContext = createButton.bind(this);
+        const startBtn = createButtonWithContext(
+            "START",
+            function () {
+                if (window.autoBuySettings && window.autoBuySettings.autoBuyerState !== 'STATE_ACTIVE') {
+                            window.autoBuySettings.autoBuyerActive = false
+                            autoBuySettingsAll.map(a => a.autoBuyerActive = false);
+                            startAutoBuyer();
+
+
+                } else {
+                    searchMarket()
+                }
+            }, '');
+        btnContainer.append($(startBtn.__root));
+
+    };
+}
 
 
 var filterSearchAmount = 0;
@@ -1727,7 +1755,7 @@ window.saveDetails = function () {
 
             console.log('filterName', filterName)
               //check if filterArray exists at localStorage
-              if (localStorage.getItem('filterArray') === null) {
+              if (localStorage.getItem('filterArray') ===  null || localStorage.getItem('filterArray') == '[object Object]'  ) {
                 filterArray = {}
                 localStorage.setItem('filterArray', JSON.stringify(filterArray)) }
             
@@ -2535,35 +2563,7 @@ function overrideStyle() {
   document.head.appendChild(style);
 };
 
-function searchMarketOverride() {
-    JSUtils.inherits(UTMarketSearchFiltersViewController, UTMarketSearchFiltersViewController)
 
-    const initTM =
-        UTMarketSearchFiltersViewController.prototype.init;
-
-    UTMarketSearchFiltersViewController.prototype.init = function () {
-        initTM.call(this);
-        let view = this.getView();
-        let root = $(view.__root);
-        const btnContainer = root.find(".button-container");
-        const createButtonWithContext = createButton.bind(this);
-        const startBtn = createButtonWithContext(
-            "START",
-            function () {
-                if (window.autoBuySettings && window.autoBuySettings.autoBuyerState !== 'STATE_ACTIVE') {
-                            window.autoBuySettings.autoBuyerActive = false
-                            autoBuySettingsAll.map(a => a.autoBuyerActive = false);
-                            startAutoBuyer();
-
-
-                } else {
-                    searchMarket()
-                }
-            }, '');
-        btnContainer.append($(startBtn.__root));
-
-    };
-}
 
 // function () {
 //     if (autoBuySettings.autoBuyerState !== 'STATE_ACTIVE') {
