@@ -68,8 +68,7 @@ class _WebAppPageState extends State<WebAppViewPage> {
                     children: [
                       InAppWebView(
                         initialUrlRequest: URLRequest(
-                            url: Uri.parse(utf8.decode(base64Url.decode(
-                                'aHR0cHM6Ly93d3cuZWEuY29tL2VuLWdiL2ZpZmEvdWx0aW1hdGUtdGVhbS93ZWItYXBwLwo=')))),
+                            url: Uri.parse('https://www.ea.com/en-gb/fifa/ultimate-team/web-app/')),
                         onWebViewCreated: (InAppWebViewController controller) {
                           webView = controller;
                           webView.addJavaScriptHandler(
