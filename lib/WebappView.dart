@@ -68,10 +68,77 @@ class _WebAppPageState extends State<WebAppViewPage> {
                     children: [
                       InAppWebView(
                         initialUrlRequest: URLRequest(
-                            url: Uri.parse('https://www.ea.com/fifa/ultimate-team/web-app/')),
+                            url: Uri.parse(utf8.decode(base64Url.decode(
+                                'aHR0cHM6Ly93d3cuZWEuY29tL2ZpZmEvdWx0aW1hdGUtdGVhbS93ZWItYXBwLw==')))),
                         onWebViewCreated: (InAppWebViewController controller) {
                           webView = controller;
+                          webView.addJavaScriptHandler(
+                            handlerName: "getProfiles",
+                            callback: (List<dynamic> payload) {
+                              return profileList;
+                            },
+                          );
+                          webView.addJavaScriptHandler(
+                            handlerName: "displaySettings",
+                            callback: (List<dynamic> payload) {
+                              developer.log("On affiche les settings",
+                                  name: "Snipe 59");
+                              displaySettings = true;
+                              setState(() {
+                                _refreshKey = UniqueKey();
+                              });
+                            },
+                          );
+                          webView.addJavaScriptHandler(
+                            handlerName: "addFilterName",
+                            callback: (List<dynamic> payload) {
+                              var filterName = payload[0];
+                              developer.log("On ajoute le filtre " + filterName,
+                                  name: "Snipe 59");
+                              List<String>? filterList =
+                                  sharedPref.getStringList("filters");
+                              filterList ??= List.empty(growable: true);
+                              if (!filterList.contains(filterName)) {
+                                filterList.add(filterName);
+                              }
+                              sharedPref.setStringList("filters", filterList);
+                            },
+                          );
+                          webView.addJavaScriptHandler(
+                            handlerName: "deleteFilterName",
+                            callback: (List<dynamic> payload) {
+                              var filterName = payload[0];
+                              developer.log("On delete le filtre " + filterName,
+                                  name: "Snipe 59");
+                              List<String>? filterList =
+                                  sharedPref.getStringList("filters");
+                              filterList ??= List.empty(growable: true);
+                              if (filterList.contains(filterName)) {
+                                filterList.remove(filterName);
+                              }
+                              sharedPref.setStringList("filters", filterList);
+                            },
+                          );
+                          webView.addJavaScriptHandler(
+                            handlerName: "injectScript",
+                            callback: (List<dynamic> payload) {
+                              developer.log("Injected script",
+                                  name: "Snipe 59");
+                                webView.injectJavascriptFileFromAsset(
+                              assetFilePath: "assets/js/jquery-3.5.1.min.js");
+                               webView.injectJavascriptFileFromAsset(
+                              assetFilePath: "assets/js/script.js");
+                          webView.injectJavascriptFileFromAsset(
+                              assetFilePath: "assets/js/hook.js");
+                         
+                          webView.injectCSSFileFromAsset(
+                              assetFilePath: "assets/css/main.css");
+                          developer.log("Injected script finished",
+                                  name: "Snipe 59");
+                            
                           
+                            },
+                          );
                         },
                         onTitleChanged: (controller, title) {},
                         onReceivedServerTrustAuthRequest:
@@ -80,10 +147,24 @@ class _WebAppPageState extends State<WebAppViewPage> {
                           return ServerTrustAuthResponse(
                               action: ServerTrustAuthResponseAction.PROCEED);
                         },
-                        onLoadStop: (controller, url) {
-                          
+                        onLoadError: (controller, url, code, message) {
+                          //reload current url
+                          controller.loadUrl(urlRequest: URLRequest(url: url));
+
                         },
-                       
+                        onLoadStop: (controller, url) {
+                          controller.injectJavascriptFileFromAsset(
+                              assetFilePath: "assets/js/initScript.js");
+                        },
+                        shouldOverrideUrlLoading:
+                            (controller, navigationAction) async {
+                          var url = navigationAction.request.url;
+                          if (url.toString().contains("futbin") ||
+                              url.toString().contains("discord")) {
+                            return NavigationActionPolicy.CANCEL;
+                          }
+                          return NavigationActionPolicy.ALLOW;
+                        },
                         onConsoleMessage: (InAppWebViewController controller,
                             ConsoleMessage consoleMessage) {},
                         initialOptions: InAppWebViewGroupOptions(
