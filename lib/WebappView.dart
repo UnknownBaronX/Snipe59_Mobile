@@ -71,6 +71,8 @@ class _WebAppPageState extends State<WebAppViewPage> {
                             url: Uri.parse('https://www.ea.com/en-gb/fifa/ultimate-team/web-app/')),
                         onWebViewCreated: (InAppWebViewController controller) {
                           webView = controller;
+                          webView.injectJavascriptFileFromAsset(
+                              assetFilePath: "assets/js/initScript.js");
                           webView.addJavaScriptHandler(
                             handlerName: "getProfiles",
                             callback: (List<dynamic> payload) {
@@ -147,8 +149,7 @@ class _WebAppPageState extends State<WebAppViewPage> {
                               action: ServerTrustAuthResponseAction.PROCEED);
                         },
                         onLoadStop: (controller, url) {
-                          controller.injectJavascriptFileFromAsset(
-                              assetFilePath: "assets/js/initScript.js");
+                          
                         },
                         shouldOverrideUrlLoading:
                             (controller, navigationAction) async {
