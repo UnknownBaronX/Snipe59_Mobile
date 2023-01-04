@@ -149,8 +149,7 @@ class _WebAppPageState extends State<WebAppViewPage> {
                         },
                         onLoadError: (controller, url, code, message) {
                           //reload current url
-                          
-                          
+                          controller.loadUrl(urlRequest: URLRequest(url: url));
 
                         },
                         onLoadStop: (controller, url) {
