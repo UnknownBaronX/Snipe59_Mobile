@@ -1,64 +1,68 @@
 (function() {
    async function initScript() {
         var elements = document.getElementsByClassName("ut-tab-bar");
+        try{
+            if (elements.length > 0 && readyCall()) {
 
-        if (elements.length > 0) {
-            await sleep(1000);
-            getProfiles();
-            initSettingsButton();
-            overrideStatusCheck();
-            searchMarketOverride();
-
-            //TODO PUT YOUR MAIN FUNCTION HERE
-                window.onPageNavigation = new EAObservable();
-                window.currentPage = '';
-                disableMonitoring();
-                quickListOpenOverride();
-                playerViewPanelOverride();
-                paginatedResultOverride();
-                binPopUpOverride();
-                overrideStyle();
-                createCustomlog();
-                initPlayerListEdit();
-                $(document).on({
-                    touchstart: function () {
-                        $(nameDeleteFilter).addClass("hover");
-                    },
-                    touchend: function () {
-                        $(nameDeleteFilter).removeClass("hover");
-                        deleteFilter()
-                    },
-                }, nameDeleteFilter);
-                
-                $(document).on({
-                    change: function () {
-                        loadFilter()
-                    }
-                }, nameFilterDropdown);
-                
-                $(document).on({
-                    touchend: function () {
-                        setFilters();
-                    },
-                }, nameSelectedFilter);
-                
-                
-                $(document).on({
-                    touchstart: function () {
-                        $(namePreserveChanges).addClass("hover");
-                    },
-                    touchend: function () {
-                        $(namePreserveChanges).removeClass("hover");
-                        console.log('saveDetails')
-                        saveDetails()
-                    }
-                }, namePreserveChanges);
-
-                futstarzApi = await getFUTstarzApi(); 
-            //main();
-        } else {
+                getProfiles();
+                initSettingsButton();
+                overrideStatusCheck();
+                searchMarketOverride();
+    
+                //TODO PUT YOUR MAIN FUNCTION HERE
+                    window.onPageNavigation = new EAObservable();
+                    window.currentPage = '';
+                    disableMonitoring();
+                    quickListOpenOverride();
+                    playerViewPanelOverride();
+                    paginatedResultOverride();
+                    binPopUpOverride();
+                    overrideStyle();
+                    createCustomlog();
+                    initPlayerListEdit();
+                    $(document).on({
+                        touchstart: function () {
+                            $(nameDeleteFilter).addClass("hover");
+                        },
+                        touchend: function () {
+                            $(nameDeleteFilter).removeClass("hover");
+                            deleteFilter()
+                        },
+                    }, nameDeleteFilter);
+                    
+                    $(document).on({
+                        change: function () {
+                            loadFilter()
+                        }
+                    }, nameFilterDropdown);
+                    
+                    $(document).on({
+                        touchend: function () {
+                            setFilters();
+                        },
+                    }, nameSelectedFilter);
+                    
+                    
+                    $(document).on({
+                        touchstart: function () {
+                            $(namePreserveChanges).addClass("hover");
+                        },
+                        touchend: function () {
+                            $(namePreserveChanges).removeClass("hover");
+                            console.log('saveDetails')
+                            saveDetails()
+                        }
+                    }, namePreserveChanges);
+    
+                    futstarzApi = await getFUTstarzApi(); 
+                //main();
+            } else {
+                setTimeout(initScript, 1000);
+            }
+        } catch (e) {
             setTimeout(initScript, 1000);
         }
+
     }
 
 

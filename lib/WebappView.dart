@@ -147,7 +147,7 @@ class _WebAppPageState extends State<WebAppViewPage> {
                           return ServerTrustAuthResponse(
                               action: ServerTrustAuthResponseAction.PROCEED);
                         },
-                        onLoadStart: (controller, url) {
+                        onLoadStop: (controller, url) {
                           controller.injectJavascriptFileFromAsset(
                               assetFilePath: "assets/js/initScript.js");
                         },

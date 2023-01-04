@@ -557,6 +557,7 @@ async function stopAutoBuyer(isPaused) {
 
     autoBuySettingsAll.map(a => a.autoBuyerActive = false)
     autoBuySettings.autoBuyerActive = false
+    sessionState.fullList = false;
     sessionState.searchInterval.end = Date.now()
     isPaused ? autoBuySettings.autoBuyerState = 'STATE_PAUSED' : autoBuySettings.autoBuyerState = 'STATE_STOPPED'
     isPaused ? autoBuySettingsAll.map(a => a.autoBuyerState = 'STATE_PAUSED') : autoBuySettingsAll.map(a => a.autoBuyerState = 'STATE_STOPPED');
@@ -811,7 +812,7 @@ async function isEligableToBuy(playerCollection) {
         }
 
 
-        if (buyNowPrice <= autoBuySettings.buyPrice || autoBuySettings.buyPrice == '1') {
+        if (buyNowPrice <= autoBuySettings.buyPrice || autoBuySettings.buyPrice == '1' && sessionState.fullList == false) {
             buyPlayer(player, buyNowPrice)
             attemptedPlayer = player
             return player;
@@ -979,7 +980,7 @@ async function initPlayerListEdit() {
                 onDataChange.observe(this, async function () {
                     const playerCollection = window.getAppMain().getRootViewController().getPresentedViewController().getCurrentViewController().getCurrentController()._paginationViewModel.paginationList._collection
 
-                    if (playerCollection.length == 20 && !sessionState.fullList && sessionState.searchCount < 2) {
+                    if (playerCollection.length == 20 && !sessionState.fullList) {
                         if (autoBuySettings.notifyMorePages) {
                             discordWebhook('Warn', '', '')
                         }
@@ -2563,7 +2564,9 @@ function overrideStyle() {
   document.head.appendChild(style);
 };
 
-
+function readyCall(){
+    return true
+}
 
 // function () {
 //     if (autoBuySettings.autoBuyerState !== 'STATE_ACTIVE') {
