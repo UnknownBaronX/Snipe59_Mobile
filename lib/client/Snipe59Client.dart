@@ -52,8 +52,7 @@ class Snipe59Client {
       if (response.statusCode == 200) {
         if (info.version == buildCompleteVersion && info.active == 'true') {
           return true;
-        } else if (info.version != buildCompleteVersion &&
-            info.active == 'false') {
+        } else if (info.version != buildCompleteVersion) {
           return true;
         } else {
           return false;
