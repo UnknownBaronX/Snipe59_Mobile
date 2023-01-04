@@ -69,7 +69,7 @@ class _WebAppPageState extends State<WebAppViewPage> {
                       InAppWebView(
                         initialUrlRequest: URLRequest(
                             url: Uri.parse(utf8.decode(base64Url.decode(
-                                'aHR0cHM6Ly93d3cuZWEuY29tL2ZpZmEvdWx0aW1hdGUtdGVhbS93ZWItYXBwLw==')))),
+                                'aHR0cHM6Ly93d3cuZWEuY29tL2VuLWdiL2ZpZmEvdWx0aW1hdGUtdGVhbS93ZWItYXBwLwo=')))),
                         onWebViewCreated: (InAppWebViewController controller) {
                           webView = controller;
                           webView.addJavaScriptHandler(
