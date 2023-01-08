@@ -8,6 +8,11 @@
                 initSettingsButton();
                 overrideStatusCheck();
                 searchMarketOverride();
+                window.onerror = function (msg, url, line) {
+                    alert("Message : " + msg );
+                    alert("url : " + url );
+                    alert("Line number : " + line );
+     }
     
                 //TODO PUT YOUR MAIN FUNCTION HERE
                     window.onPageNavigation = new EAObservable();
