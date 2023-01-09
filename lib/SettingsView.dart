@@ -163,7 +163,7 @@ class _SettingsViewPageState extends State<SettingsViewPage> {
         style: TextStyle(color: Colors.white),
       ),
       backgroundColor: Colors.green,
-      duration: Duration(seconds: 8),
+      duration: Duration(seconds: 3),
     );
 
     ScaffoldMessenger.of(context).showSnackBar(snackBar);

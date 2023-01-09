@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'dart:convert';
 import 'dart:developer' as developer;
 import 'package:wakelock/wakelock.dart';
@@ -67,9 +69,8 @@ class _WebAppPageState extends State<WebAppViewPage> {
                   child: Stack(
                     children: [
                       InAppWebView(
-                        initialUrlRequest: URLRequest(
-                            url: Uri.parse(utf8.decode(base64Url.decode(
-                                'aHR0cHM6Ly93d3cuZWEuY29tL2ZpZmEvdWx0aW1hdGUtdGVhbS93ZWItYXBwLw==')))),
+                         initialUrlRequest:
+                        URLRequest(url: WebUri('https://www.ea.com/en-en/fifa/ultimate-team/web-app/')),
                         onWebViewCreated: (InAppWebViewController controller) {
                           webView = controller;
                           webView.addJavaScriptHandler(
@@ -149,7 +150,7 @@ class _WebAppPageState extends State<WebAppViewPage> {
                         },
                         onLoadError: (controller, url, code, message) {
                           //reload current url
-                          controller.loadUrl(urlRequest: URLRequest(url: url));
+                          controller.loadUrl(urlRequest: URLRequest(url: WebUri(url.toString())));
 
                         },
                         onLoadStop: (controller, url) {

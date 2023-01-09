@@ -52,7 +52,9 @@ dependencies:
   package_info: ^2.0.2
   package_info_plus: ^3.0.2
   wakelock: ^0.6.2
-  flutter_inappwebview: ^5.7.2+3
+  flutter_inappwebview:
+    git:
+      url: https://github.com/pichillilorenzo/flutter_inappwebview.git
 
 dev_dependencies:
   flutter_test:
