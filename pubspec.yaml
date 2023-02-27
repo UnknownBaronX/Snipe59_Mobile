@@ -15,7 +15,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.5+15
+version: 1.0.6+16
 
 environment:
   sdk: ">=2.18.4 <3.0.0"
@@ -52,9 +52,7 @@ dependencies:
   package_info: ^2.0.2
   package_info_plus: ^3.0.2
   wakelock: ^0.6.2
-  flutter_inappwebview:
-    git:
-      url: https://github.com/pichillilorenzo/flutter_inappwebview.git
+  flutter_inappwebview: ^6.0.0-beta.22
 
 dev_dependencies:
   flutter_test:
@@ -81,11 +79,10 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-      - logo.svg
-      - SnipeLogo.png
-      - RT.png
-      - tp-128.png
-      - splash.png
+      - assets/SnipeLogo.png
+      - assets/RT.png
+      - assets/tp-128.png
+      - assets/splash.png
       - assets/js/hook.js
       - assets/js/script.js
       - assets/js/initScript.js

@@ -71,6 +71,7 @@ class _WebAppPageState extends State<WebAppViewPage> {
                       InAppWebView(
                          initialUrlRequest:
                         URLRequest(url: WebUri('https://www.ea.com/en-en/fifa/ultimate-team/web-app/')),
+          
                         onWebViewCreated: (InAppWebViewController controller) {
                           webView = controller;
                           webView.addJavaScriptHandler(
@@ -141,6 +142,11 @@ class _WebAppPageState extends State<WebAppViewPage> {
                             },
                           );
                         },
+                                onUpdateVisitedHistory: (controller, url, androidIsReload) {
+                                  //create alert popup
+
+
+                          },
                         onTitleChanged: (controller, title) {},
                         onReceivedServerTrustAuthRequest:
                             (InAppWebViewController controller,
@@ -153,6 +159,7 @@ class _WebAppPageState extends State<WebAppViewPage> {
                           controller.loadUrl(urlRequest: URLRequest(url: WebUri(url.toString())));
 
                         },
+                        
                         onLoadStop: (controller, url) {
                           controller.injectJavascriptFileFromAsset(
                               assetFilePath: "assets/js/initScript.js");

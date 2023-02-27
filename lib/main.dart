@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'dart:io';
 
 import 'package:circle_nav_bar/circle_nav_bar.dart';
@@ -141,7 +143,7 @@ class _MyHomePageState extends State<MyHomePage> {
         height: 60,
         circleWidth: 60,
         activeIndex: tabIndex,
-        onTab: (v) {
+        onTap: (v) {
           tabIndex = v;
           pageController.jumpToPage(tabIndex);
         },

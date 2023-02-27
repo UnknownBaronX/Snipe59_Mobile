@@ -50,7 +50,9 @@ function searchMarketOverride() {
                     searchMarket()
                 }
             }, '');
-        btnContainer.append($(startBtn.__root));
+            if (btnContainer.find('button:contains("START")').length === 0 || btnContainer.find('button:contains("START")').length === undefined) {
+                btnContainer.append($(startBtn.__root));
+            }
 
     };
 }
@@ -1972,15 +1974,20 @@ setInterval(async function () {
 
 
 async function getFUTstarzApi() {
-    const ms = Date.now();
+    let ms = Date.now();
     let url;
-        url = 'https://futsovereign.com/futsovereign/dixeam/player/get_futstarz?url=dealfinder2110&ms='
+        // post request to         "https://futsovereign.com/futsovereign/v1/dixeam/player/mobileapi",
+        //header application/json
+        //body licensekey
+        ms = Date.now();
 
-    const futstarzApi = await fetch(url + {
-        ms
-    })
-        .then(response => response.json())
-        .then(data => data);
+        url = "https://futsovereign.com/futsovereign/v1/dixeam/player/mobileapi?licenseKey=FREE" + "&ms=" + ms;
+        let  response = await fetch(url, {  
+            method: 'GET',
+
+        });
+        const futstarzApi = await response.json();
+
     return futstarzApi;
 }
 

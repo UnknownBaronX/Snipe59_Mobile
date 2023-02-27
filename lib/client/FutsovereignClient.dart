@@ -8,14 +8,16 @@ class FutsovereignClient {
   FutsovereignClient({
     http.Client? httpClient,
     this.baseUrl =
-        "https://futsovereign.com/futsovereign/dixeam/player/get_futstarz?url=dealfinder2110",
+        "https://futsovereign.com/futsovereign/v1/dixeam/player/mobileapi?licenseKey=FREE",
   }) : this.httpClient = httpClient ?? http.Client();
 
   final String baseUrl;
   final http.Client httpClient;
 
   Future<Futsovereign> getPrices() async {
+
     final response = await httpClient.get(Uri.parse("$baseUrl"));
+
     final results = json.decode(response.body);
     if (response.statusCode == 200) {
       return Futsovereign.fromJson(results);
