@@ -2,7 +2,7 @@
     package="com.FutstarzRedBaron.snipe59">
     <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="snipe59"
+        android:label="Snipe 59"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity

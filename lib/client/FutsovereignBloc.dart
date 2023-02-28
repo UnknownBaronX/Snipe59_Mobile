@@ -59,7 +59,7 @@ class FutsovereignBloc extends Bloc<FutsovereignEvent, FutsovereignState> {
       futsovereignRepository.setItems(results.items);
       emit(FutsovereignStateSuccess(results.items));
     } catch (error) {
-      developer.log(error.toString(), name: 'Snipe59');
+      developer.log(error.toString(), name: 'snipe59');
       emit(FutsovereignStateError('something went wrong'));
     }
   }

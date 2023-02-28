@@ -55,14 +55,14 @@ class Snipe59Bloc extends Bloc<Snipe59Event, Snipe59State> {
       var licence = await snipe59Repository.fetchLicence(event.licence);
       DateTime dt = DateTime.parse(licence.data!.expiresAt!);
       if (dt.isAfter(DateTime.now()) && licence.data!.status! == 2) {
-        developer.log("Licence date valid", name: "Snipe59");
+        developer.log("Licence date valid", name: "snipe59");
         emit(const Snipe59StateSuccess());
       } else {
-        developer.log("Licence date invalid", name: "Snipe59");
+        developer.log("Licence date invalid", name: "snipe59");
         emit(const Snipe59StateError(code: -1));
       }
     } catch (error) {
-      developer.log(error.toString(), name: 'Snipe59');
+      developer.log(error.toString(), name: 'snipe59');
       emit(const Snipe59StateError(code: 404));
       //emit(const Snipe59StateSuccess());
 

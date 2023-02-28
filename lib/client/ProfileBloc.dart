@@ -163,7 +163,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       emit(ProfileStateListSuccess(
           profileList: profileList, filterList: filterList));
     } catch (error) {
-      developer.log(error.toString(), name: 'Snipe59');
+      developer.log(error.toString(), name: 'snipe59');
       emit(ProfileStateListError());
     }
   }

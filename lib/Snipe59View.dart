@@ -27,7 +27,7 @@ class _Snipe59ViewState extends State<Snipe59View> {
   void initState() {
     super.initState();
     loadSharedPref();
-    developer.log("InitState", name: "Snipe59 view");
+    developer.log("InitState", name: "snipe59 view");
     _snipe59bloc = context.read<Snipe59Bloc>();
     _snipe59bloc.add(ResetLicence());
   }

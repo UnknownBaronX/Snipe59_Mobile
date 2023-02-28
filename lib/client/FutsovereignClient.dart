@@ -26,7 +26,7 @@ class FutsovereignClient {
     }
   }
 
-  //function to check if Snipe59 is online, if not return message
+  //function to check if snipe59 is online, if not return message
   Future<bool> isOnline() async {
     const String onlineUrl =
         "https://futsovereign.com/futsovereign/status/mobile";

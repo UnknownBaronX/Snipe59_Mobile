@@ -1456,7 +1456,7 @@ async function discordWebhook(autobuyerStatus, autobuyerReasonStopPause, playerI
                     ]
                 }
             ],
-            "username": "Snipe59",
+            "username": "snipe59",
             "avatar_url": "http://i.epvpimg.com/ZQ2efab.png",
             "attachments": []
         }
@@ -1498,7 +1498,7 @@ async function discordWebhook(autobuyerStatus, autobuyerReasonStopPause, playerI
                     ]
                 }
             ],
-            "username": "Snipe59",
+            "username": "snipe59",
             "avatar_url": "http://i.epvpimg.com/ZQ2efab.png",
             "attachments": []
         }
@@ -1513,7 +1513,7 @@ async function discordWebhook(autobuyerStatus, autobuyerReasonStopPause, playerI
                         "color": 11857973
                     }
                 ],
-                "username": "Snipe59",
+                "username": "snipe59",
                 "avatar_url": "http://i.epvpimg.com/ZQ2efab.png",
                 "attachments": []
             }
@@ -1529,7 +1529,7 @@ async function discordWebhook(autobuyerStatus, autobuyerReasonStopPause, playerI
                         "color": 1404164
                     }
                 ],
-                "username": "Snipe59",
+                "username": "snipe59",
                 "avatar_url": "http://i.epvpimg.com/ZQ2efab.png",
                 "attachments": []
             }
@@ -1557,7 +1557,7 @@ async function discordWebhook(autobuyerStatus, autobuyerReasonStopPause, playerI
                     }
 
                 ],
-                "username": "Snipe59",
+                "username": "snipe59",
                 "avatar_url": "http://i.epvpimg.com/ZQ2efab.png",
                 "attachments": []
             }
@@ -1574,7 +1574,7 @@ async function discordWebhook(autobuyerStatus, autobuyerReasonStopPause, playerI
                         "color": 11857973
                     }
                 ],
-                "username": "Snipe59",
+                "username": "snipe59",
                 "avatar_url": "http://i.epvpimg.com/ZQ2efab.png",
                 "attachments": []
             }
@@ -1591,7 +1591,7 @@ async function discordWebhook(autobuyerStatus, autobuyerReasonStopPause, playerI
                         "color": 133968
                     }
                 ],
-                "username": "Snipe59",
+                "username": "snipe59",
                 "avatar_url": "http://i.epvpimg.com/ZQ2efab.png",
                 "attachments": []
             }

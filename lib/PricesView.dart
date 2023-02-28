@@ -83,7 +83,7 @@ class _PricesViewState extends State<PricesView> {
         ),
         BlocConsumer<FutsovereignBloc, FutsovereignState>(
           listener: (context, state) {
-            developer.log(state.toString(), name: 'Snipe59');
+            developer.log(state.toString(), name: 'snipe59');
           },
           builder: (context, state) {
             if (state is FutsovereignStateLoading) {
